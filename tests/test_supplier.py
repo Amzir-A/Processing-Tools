@@ -2,7 +2,7 @@ import pytest
 import requests
 
 @pytest.fixture
-def _url():
+def _supplier_url():
     return 'http://localhost:3000/api/v1/suppliers'
 
 
@@ -22,33 +22,34 @@ def _supplier_data():
         "reference": "N-SUP0497"
     }
 
-def test_get_suppliers(_url):
-    url = _url
+def test_get_suppliers(_supplier_url):
+    url = _supplier_url
     headers = {
-        'API_KEY': 'a1b2c3d4e5'  # Zorg ervoor dat deze API-sleutel geldig is en toegang heeft tot de endpoint
+        'API_KEY': 'a1b2c3d4e5' 
     }
 
-    # Verzend een GET-verzoek naar de API
+    # Send a GET request to the API
     response = requests.get(url, headers=headers)
 
-    # Controleer of de statuscode 200 is
+    # Check if the status code is 200 (OK)
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
 
-def test_add_supplier(_url, _supplier_data):
-    url = _url
+def test_add_supplier(_supplier_url, _supplier_data):
+    url = _supplier_url
     headers = {
-        'API_KEY': 'a1b2c3d4e5',  # Zorg ervoor dat deze API-sleutel geldig is en toegang heeft tot de endpoint
+        'API_KEY': 'a1b2c3d4e5', 
         'Content-Type': 'application/json'
     }
 
-    # Verzend een POST-verzoek om een nieuwe leverancier toe te voegen
+    # Send a POST request to add a new supplier
     response = requests.post(url, headers=headers, json=_supplier_data)
 
-    # Controleer of de statuscode 201 (Created) is
+    # Check if the status code is 201 (Created)
     assert response.status_code == 201, f"Unexpected status code: {response.status_code}"
 
-    # Verifieer dat er een GET-verzoek kan worden uitgevoerd om leveranciers op te halen
+    # Verify the supplier was added by sending a GET request
     response = requests.get(url, headers=headers)
+    suppliers = response.json()
 
-    # Controleer of de statuscode 200 is
-    assert response.status_code == 200, f"Unexpected status code when fetching suppliers: {response.status_code}"
+    # Check if the new supplier is in the list of suppliers
+    assert any(supplier['name'] == _supplier_data['name'] for supplier in suppliers), "Supplier was not added"
