@@ -10,7 +10,7 @@ def _supplier_url():
 def _supplier_data():
     return {
         "code": "SUP0497",
-        "name": "Neal-Hoffman",
+        "name": "meneer banaan",
         "address": "7032 Mindy Meadow",
         "address_extra": "Apt. 937",
         "city": "Lake Alex",

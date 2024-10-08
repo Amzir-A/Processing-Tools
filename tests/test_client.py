@@ -23,7 +23,7 @@ def _client_data():
 def test_get_clients(_url):
     url = _url
     headers = {
-        'API_KEY': 'a1b2c3d4e5'  # Ensure this API key is valid and has access to the endpoint
+        'API_KEY': 'a1b2c3d4e5'  
     }
 
     # Send a GET request to the API
@@ -38,7 +38,7 @@ def test_get_clients(_url):
 def test_add_client(_url, _client_data):
     url = _url
     headers = {
-        'API_KEY': 'a1b2c3d4e5',  # Ensure this API key is valid and has access to the endpoint
+        'API_KEY': 'a1b2c3d4e5', 
         'Content-Type': 'application/json'
     }
 
