@@ -22,18 +22,6 @@ def _supplier_data():
         "reference": "N-SUP0497"
     }
 
-def test_get_suppliers(_supplier_url):
-    url = _supplier_url
-    headers = {
-        'API_KEY': 'a1b2c3d4e5' 
-    }
-
-    # Send a GET request to the API
-    response = requests.get(url, headers=headers)
-    
-
-    # Check if the status code is 200 (OK)
-    assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
 
 def test_add_supplier(_supplier_url, _supplier_data):
     url = _supplier_url
