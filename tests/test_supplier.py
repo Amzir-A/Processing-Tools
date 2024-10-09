@@ -30,6 +30,7 @@ def test_get_suppliers(_supplier_url):
 
     # Send a GET request to the API
     response = requests.get(url, headers=headers)
+    
 
     # Check if the status code is 200 (OK)
     assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
